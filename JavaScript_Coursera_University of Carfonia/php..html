@@ -1,0 +1,43 @@
+<?php
+if (isset($_POST['submit'])) {
+  // Sanitize user input (example using htmlspecialchars)
+  $name = htmlspecialchars($_POST['name']);
+  $email = htmlspecialchars($_POST['email']);
+  $message = htmlspecialchars($_POST['message']);
+
+  $to = "ishimwechris765@gmail.com"; // Replace with your email address
+  $subject = "Form Submission";
+
+  // Improved message construction with line breaks
+  $message = "Name: " . $name . "\n" .
+             "Email: " . $email . "\n" .
+             "Message: " . $message . "\n";
+
+  $headers = "From: " . $email;
+
+  if (mail($to, $subject, $message, $headers)) {
+    echo "Thank you for contacting us!";
+  } else {
+    echo "Sorry, there was an error sending your message. Please try again later.";
+    // Optional: Log the error for further investigation
+  }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea><br><br>
+        <input type="submit" name="submit" value="Send">
+    </form>
+</body>
+</html>
